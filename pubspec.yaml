@@ -40,6 +40,7 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   dotted_border: ^2.1.0
   carousel_slider: ^5.1.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
@@ -107,6 +108,27 @@ flutter:
     - lib\assets\image10.png
     - lib\assets\image11.png
     - lib\assets\image12.png
+    - lib\assets\24ab8e9b40b6fdd03b72fa01ed82c1bcc246e14f.png
+    - lib\assets\homescreenimage.png
+    - lib\assets\homesubscriptionimage.png
+    - lib\assets\profileimage1.png
+    - lib\assets\profileimage2.png
+    - lib\assets\profileimage3.png
+    - lib\assets\profileimage4.png
+    - lib\assets\profileimage5.png
+    - lib\assets\profileimage6.png
+    - lib\assets\profileimage7.png
+    - lib\assets\profileimage8.png
+    - lib\assets\profileimage9.png
+    - lib\assets\editimage.png
+    - lib\assets\homepageimage.png
+    - lib\assets\61b63d6794575f73d1e67ba07128b9f11bcc23a5.png
+    - lib\assets\locationimage.png
+    - lib\assets\newsprofile.png
+    - lib\assets\whatsppimage.png
+    - lib\assets\premiumimage.png
+    - lib\assets\loginimages.png
+    - lib\assets\circleloginimage.png
     # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

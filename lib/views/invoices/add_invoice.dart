@@ -222,7 +222,7 @@ class AddInvoice extends StatefulWidget {
 }
 
 class _AddInvoiceState extends State<AddInvoice> {
-  bool withGST = true; // Default to "With GST"
+  bool withGST = true; 
 
   @override
   Widget build(BuildContext context) {
@@ -236,21 +236,30 @@ class _AddInvoiceState extends State<AddInvoice> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-              onPressed: () => Navigator.pop(context),
-            ),
-            const Text(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          child: AppBar(
+            backgroundColor: const Color(0xFF175889),
+            title: const Text(
               'Create Invoice',
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ],
+            leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),
+            elevation: 0,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -316,6 +325,7 @@ class _AddInvoiceState extends State<AddInvoice> {
               decoration: inputDecoration.copyWith(
                 labelText: 'Service',
                 hintText: 'Description',
+                suffixIcon: Icon(Icons.add)
               ),
             ),
             const SizedBox(height: 16),

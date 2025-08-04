@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:poster_maker/views/checklist/check_list_screen.dart';
-import 'package:poster_maker/views/home/group_screen.dart';
-import 'package:poster_maker/views/invoices/list_invoice.dart';
 import 'package:poster_maker/views/jobscreen/applied_jobs_screen.dart';
 import 'package:poster_maker/views/jobscreen/recieved_job_application.dart';
 import 'package:poster_maker/views/profile/edit_profile.dart';
@@ -15,15 +12,29 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Icon(Icons.person_outline, color: Colors.black),
-        title: const Text(
-          'Profile',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          child: AppBar(
+            backgroundColor: const Color(0xFF175889),
+            title: const Text(
+              'Profile',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.person, color: Colors.white),
+            ),
+            elevation: 0,
           ),
         ),
       ),
@@ -33,18 +44,39 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              Positioned(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile()));
-                  },
-                  child: const CircleAvatar(
-                    radius: 32,
-                    backgroundImage: AssetImage(
-                        'lib/assets/880309d8d37dba8d3a87672e52a35231ec7c6673.png'), 
+              Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditProfile()));
+                    },
+                    child: const CircleAvatar(
+                      radius: 32,
+                      backgroundImage: AssetImage(
+                        'lib/assets/880309d8d37dba8d3a87672e52a35231ec7c6673.png',
+                      ),
+                    ),
                   ),
-                ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.edit,
+                        size: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(width: 16),
               const Expanded(
@@ -56,58 +88,40 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
           const Divider(height: 32),
-          _buildTile(Icons.person, 'Refer'),
-          Divider(),
+          _buildImageTile('lib/assets/profileimage1.png', 'Refer'),
+          const Divider(),
           GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SubscriptionScreen()));
-              },
-              child: _buildTile(Icons.subscriptions, 'Subscriptions')),
-          Divider(),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => SubscriptionScreen()));
+            },
+            child: _buildImageTile(
+                'lib/assets/profileimage6.png', 'Subscriptions'),
+          ),
+          const Divider(),
           GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CheckListScreen()));
-              },
-              child: _buildTile(Icons.check_box, 'Check list')),
-          Divider(),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => AppliedJobsScreen()));
-              },
-              child: _buildTile(Icons.assignment_turned_in, 'Applied Jobs')),
-          Divider(),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => RecievedJobApplication()));
-              },
-              child: _buildTile(Icons.description, 'Job Applications')),
-          Divider(),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ListInvoiceScreen()));
-              },
-              child: _buildTile(Icons.inventory_outlined, 'Get Invoice')),
-          Divider(),
-          GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ListResume()));
-              },
-              child: _buildTile(Icons.file_download, 'Upload Resume')),
-          Divider(),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RecievedJobApplication()));
+            },
+            child:
+                _buildImageTile('lib/assets/profileimage7.png', 'Job info'),
+          ),
+          // const Divider(),
+          // GestureDetector(
+          //   onTap: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => RecievedJobApplication()));
+          //   },
+          //   child: _buildImageTile(
+          //       'lib/assets/profileimage8.png', 'Job Applications'),
+          // ),
+          
+          const Divider(),
           const SizedBox(height: 20),
           const Text(
             'Support & Settings',
@@ -117,39 +131,34 @@ class ProfileScreen extends StatelessWidget {
               fontSize: 14,
             ),
           ),
-          Divider(),
+          const Divider(),
           const SizedBox(height: 16),
-          _buildTile(Icons.privacy_tip, 'Privacy Policy',
-              iconColor: Colors.orange),
-          Divider(),
-          _buildTile(Icons.info_outline, 'About Us',
-              iconColor: Colors.lightBlue),
-          Divider(),
-          _buildTile(Icons.help_outline, 'Help', iconColor: Colors.cyan),
-          Divider(),
-          _buildTile(Icons.power_settings_new, 'Logout',
-              iconColor: Colors.deepPurple),
-          Divider(),
+          _buildImageTile('lib/assets/profileimage2.png', 'Privacy Policy'),
+          const Divider(),
+          _buildImageTile('lib/assets/profileimage3.png', 'About Us'),
+          const Divider(),
+          _buildImageTile('lib/assets/profileimage4.png', 'Help'),
+          const Divider(),
+          _buildImageTile('lib/assets/profileimage5.png', 'Logout'),
+          const Divider(),
         ],
       ),
     );
   }
 
-  Widget _buildTile(IconData icon, String title,
-      {Color iconColor = Colors.blue}) {
+  Widget _buildImageTile(String imagePath, String title) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 0),
       leading: CircleAvatar(
         radius: 18,
-        backgroundColor: iconColor.withOpacity(0.1),
-        child: Icon(icon, size: 20, color: iconColor),
+        backgroundColor: Colors.grey.shade200,
+        backgroundImage: AssetImage(imagePath),
       ),
       title: Text(
         title,
         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
       ),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-      // onTap: () {},
     );
   }
 }

@@ -7,15 +7,24 @@ class PostJobScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(onPressed: (){
-          Navigator.of(context).pop();
-        }, icon: Icon(Icons.arrow_back_ios)),
-        title: const Text(
-          'Post a New Job',
-          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+     appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          child: AppBar(
+            backgroundColor: const Color(0xFF175889),
+            title: const Text(
+              'Post a New job',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+             leading: IconButton(onPressed: (){
+              Navigator.of(context).pop();
+             }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+            elevation: 0,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -41,48 +50,19 @@ class PostJobScreen extends StatelessWidget {
                 Expanded(child: _buildTextField(label: 'Experience')),
               ],
             ),
-            const SizedBox(height: 12),
-            _buildTextField(label: 'Skills'),
-            const SizedBox(height: 12),
-            _buildTextField(label: 'Company Name'),
-            const SizedBox(height: 12),
-            _buildTextField(label: 'Application Email'),
-            const SizedBox(height: 16),
+           
 
             // Upload Logo
-            GestureDetector(
-              onTap: () {
-                // Add image picker logic here
-              },
-              child: Container(
-                width: double.infinity,
-                height: 120,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.upload_file, size: 30, color: Colors.black54),
-                    SizedBox(height: 8),
-                    Text(
-                      'Upload Logo',
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+         
 
-            const SizedBox(height: 24),
+            const SizedBox(height: 270),
 
             // Post Now Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 44, 68, 88),
+                  backgroundColor: const Color(0xFF175889),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),

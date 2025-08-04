@@ -7,13 +7,24 @@ class CricketDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text('Back',style: TextStyle(fontWeight: FontWeight.bold),),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          child: AppBar(
+            backgroundColor: const Color(0xFF175889),
+            title: const Text(
+              'Back',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+             leading: IconButton(onPressed: (){
+              Navigator.of(context).pop();
+             }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+            elevation: 0,
+          ),
         ),
       ),
       body: Padding(
@@ -22,6 +33,7 @@ class CricketDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 20,),
               // Article Image
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),

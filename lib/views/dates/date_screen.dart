@@ -8,28 +8,24 @@ class DateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, size: 18),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            const SizedBox(width: 4),
-            const Text(
+       appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          child: AppBar(
+            backgroundColor: const Color(0xFF175889),
+            title: const Text(
               'Today',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-          ],
+             leading: IconButton(onPressed: (){
+              Navigator.of(context).pop();
+             }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+            elevation: 0,
+          ),
         ),
       ),
       body: Padding(
@@ -76,7 +72,7 @@ class DateScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 37, 94, 141), // Change background color to blue
+                  color: const Color(0xFF175889), // Change background color to blue
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
