@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:poster_maker/views/ITR%20filtering/itr_filtering_screen.dart';
 
 class DateScreen extends StatelessWidget {
-  const DateScreen({super.key});
+  final String?id;
+  const DateScreen({super.key,this.id});
 
   @override
   Widget build(BuildContext context) {

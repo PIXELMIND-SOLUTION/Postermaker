@@ -315,7 +315,8 @@ import 'package:flutter/material.dart';
 import 'package:poster_maker/views/resume/upload_resume.dart';
 
 class JobDetailsScreen extends StatelessWidget {
-  const JobDetailsScreen({super.key});
+  final String?id;
+  const JobDetailsScreen({super.key,this.id});
 
   @override
   Widget build(BuildContext context) {

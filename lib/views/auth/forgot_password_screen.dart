@@ -178,6 +178,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:poster_maker/views/auth/otp_screen.dart';
+import 'package:poster_maker/views/auth/sample_screen.dart';
 import 'package:poster_maker/views/auth/signup_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -210,7 +212,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ],
           ),
 
-          // Foreground scrollable content
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(top: 60),
@@ -303,7 +304,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Reset password logic
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=>const SampleScreen()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF22577A),
@@ -353,3 +354,299 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:poster_maker/views/provider/forgot_password_provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:poster_maker/views/auth/otp_screen.dart';
+// import 'package:poster_maker/views/auth/signup_screen.dart';
+
+
+// class ForgotPasswordScreen extends StatefulWidget {
+//   const ForgotPasswordScreen({super.key});
+
+//   @override
+//   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+// }
+
+// class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+//   bool _obscurePassword = true;
+//   bool _obscureConfirmPassword = true;
+  
+//   final TextEditingController _newPasswordController = TextEditingController();
+//   final TextEditingController _confirmPasswordController = TextEditingController();
+//   final _formKey = GlobalKey<FormState>();
+
+//   @override
+//   void dispose() {
+//     _newPasswordController.dispose();
+//     _confirmPasswordController.dispose();
+//     super.dispose();
+//   }
+
+//   void _resetPassword() async {
+//     if (!_formKey.currentState!.validate()) {
+//       return;
+//     }
+
+//     final provider = Provider.of<ForgotPasswordProvider>(context, listen: false);
+    
+//     final success = await provider.resetPassword(
+//       _newPasswordController.text.trim(),
+//       _confirmPasswordController.text.trim(),
+//     );
+
+//     if (success) {
+//       provider.showMessage(context, provider.message, isError: false);
+      
+//       // Get the token from provider or SharedPreferences
+//       String? token = await provider.getStoredToken();
+      
+//       // Navigate to OTP screen with token
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(
+//           builder: (context) => OtpScreen(token: token),
+//         ),
+//       );
+//     } else {
+//       provider.showMessage(context, provider.message);
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Stack(
+//         children: [
+//           // Background split
+//           Column(
+//             children: [
+//               Expanded(
+//                 flex: 2,
+//                 child: Container(color: const Color(0xFF22577A)),
+//               ),
+//               Expanded(
+//                 flex: 3,
+//                 child: Container(color: Colors.white),
+//               ),
+//             ],
+//           ),
+
+//           SingleChildScrollView(
+//             child: Padding(
+//               padding: const EdgeInsets.only(top: 60),
+//               child: Container(
+//                 margin: const EdgeInsets.symmetric(horizontal: 24),
+//                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+//                 decoration: BoxDecoration(
+//                   color: Colors.white,
+//                   borderRadius: BorderRadius.circular(16),
+//                   boxShadow: [
+//                     BoxShadow(
+//                       color: Colors.black.withOpacity(0.1),
+//                       blurRadius: 10,
+//                       offset: const Offset(0, 4),
+//                     ),
+//                   ],
+//                 ),
+//                 child: Form(
+//                   key: _formKey,
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       const Center(
+//                         child: Text(
+//                           'Forgot Password',
+//                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 20),
+//                       Center(
+//                         child: Image.asset(
+//                           'lib/assets/forgotpassword.png',
+//                           height: 150,
+//                         ),
+//                       ),
+//                       const SizedBox(height: 150),
+
+//                       // New Password
+//                       TextFormField(
+//                         controller: _newPasswordController,
+//                         obscureText: _obscurePassword,
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please enter new password';
+//                           }
+//                           if (value.length < 6) {
+//                             return 'Password must be at least 6 characters';
+//                           }
+//                           return null;
+//                         },
+//                         decoration: InputDecoration(
+//                           labelText: 'New Password',
+//                           hintText: 'Enter new password',
+//                           border: OutlineInputBorder(
+//                             borderRadius: BorderRadius.circular(8),
+//                           ),
+//                           contentPadding:
+//                               const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+//                           suffixIcon: IconButton(
+//                             icon: Icon(
+//                               _obscurePassword ? Icons.visibility_off : Icons.visibility,
+//                             ),
+//                             onPressed: () {
+//                               setState(() {
+//                                 _obscurePassword = !_obscurePassword;
+//                               });
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 16),
+
+//                       // Confirm Password
+//                       TextFormField(
+//                         controller: _confirmPasswordController,
+//                         obscureText: _obscureConfirmPassword,
+//                         validator: (value) {
+//                           if (value == null || value.isEmpty) {
+//                             return 'Please confirm your password';
+//                           }
+//                           if (value != _newPasswordController.text) {
+//                             return 'Passwords do not match';
+//                           }
+//                           return null;
+//                         },
+//                         decoration: InputDecoration(
+//                           labelText: 'Confirm Password',
+//                           hintText: 'Re-enter password',
+//                           border: OutlineInputBorder(
+//                             borderRadius: BorderRadius.circular(8),
+//                           ),
+//                           contentPadding:
+//                               const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+//                           suffixIcon: IconButton(
+//                             icon: Icon(
+//                               _obscureConfirmPassword
+//                                   ? Icons.visibility_off
+//                                   : Icons.visibility,
+//                             ),
+//                             onPressed: () {
+//                               setState(() {
+//                                 _obscureConfirmPassword = !_obscureConfirmPassword;
+//                               });
+//                             },
+//                           ),
+//                         ),
+//                       ),
+//                       const SizedBox(height: 24),
+
+//                       // Continue Button with Provider
+//                       Consumer<ForgotPasswordProvider>(
+//                         builder: (context, provider, child) {
+//                           return SizedBox(
+//                             width: double.infinity,
+//                             child: ElevatedButton(
+//                               onPressed: provider.isLoading ? null : _resetPassword,
+//                               style: ElevatedButton.styleFrom(
+//                                 backgroundColor: const Color(0xFF22577A),
+//                                 padding: const EdgeInsets.symmetric(vertical: 16),
+//                                 elevation: 4,
+//                                 shadowColor: Colors.black45,
+//                                 shape: RoundedRectangleBorder(
+//                                   borderRadius: BorderRadius.circular(12),
+//                                 ),
+//                               ),
+//                               child: provider.isLoading
+//                                   ? const SizedBox(
+//                                       height: 20,
+//                                       width: 20,
+//                                       child: CircularProgressIndicator(
+//                                         color: Colors.white,
+//                                         strokeWidth: 2,
+//                                       ),
+//                                     )
+//                                   : const Text(
+//                                       "Continue",
+//                                       style: TextStyle(
+//                                         color: Colors.white,
+//                                         fontWeight: FontWeight.w600,
+//                                         letterSpacing: 0.5,
+//                                         fontSize: 16,
+//                                       ),
+//                                     ),
+//                             ),
+//                           );
+//                         },
+//                       ),
+//                       const SizedBox(height: 20),
+
+//                       // Register
+//                       Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: [
+//                           const Text("Don't have an account?"),
+//                           TextButton(
+//                             onPressed: () {
+//                               Navigator.push(
+//                                 context,
+//                                 MaterialPageRoute(builder: (context) => SignupScreen()),
+//                               );
+//                             },
+//                             child: const Text(
+//                               'Register',
+//                               style: TextStyle(color: Color(0xFF22577A)),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
